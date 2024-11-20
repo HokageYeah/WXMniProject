@@ -1,4 +1,4 @@
-import { _decorator, Component, EventMouse, Input, input, Node, Vec3, Animation } from 'cc';
+import { _decorator, Component, EventMouse, Input, input, Node, Vec3, Animation, EventTouch } from 'cc';
 const { ccclass, property } = _decorator;
 
 // 添加一个放大比
@@ -8,6 +8,10 @@ export class PlayerController extends Component {
 
     @property(Animation)
     BodyAnim:Animation = null;
+    @property(Node)
+    leftTouch: Node = null;
+    @property(Node)
+    rightTouch: Node = null;
     private _startJump: boolean = false; // 是否开始跳跃
     private _jumpStep: number = 0; // 跳跃步数
     private _curJumpTime: number = 0; // 当前跳跃时间
@@ -26,11 +30,17 @@ export class PlayerController extends Component {
         this._targetPos.set(0,0,0);
     }
 
+    // 通过 input.on 的方式监听，这种方式会监听屏幕上所有的触摸
+    // 通过 node.on 的方式监听时，可以监听某个范围内的触摸事件
     setInputActive(active: boolean) {
         if(active) {
-            input.on(Input.EventType.MOUSE_UP, this.onMouseUp, this);
+            // input.on(Input.EventType.MOUSE_UP, this.onMouseUp, this);
+            this.leftTouch.on(Input.EventType.TOUCH_START, this.onTouchStart, this);
+            this.rightTouch.on(Input.EventType.TOUCH_START, this.onTouchStart, this);
         } else {
-            input.off(Input.EventType.MOUSE_UP, this.onMouseUp, this);
+            // input.off(Input.EventType.MOUSE_UP, this.onMouseUp, this);
+            this.leftTouch.off(Input.EventType.TOUCH_START, this.onTouchStart, this);
+            this.rightTouch.off(Input.EventType.TOUCH_START, this.onTouchStart, this);
         }
     }
     // 根据每次的更新来计算角色最新的位置：
@@ -58,6 +68,17 @@ export class PlayerController extends Component {
             this.jumpByStep(1);
         } else if(event.getButton() == 2) {
             console.log('鼠标右键');
+            this.jumpByStep(2);
+        }
+    }
+    // 添加响应触摸的回调
+    onTouchStart(event: EventTouch) {
+        console.log('onTouchStart----', event);
+        const target = event.target as Node;
+        console.log('onTouchStart----target', target.name);
+        if(target.name == 'LeftTouch') {
+            this.jumpByStep(1);
+        } else if(target.name == 'RightTouch') {
             this.jumpByStep(2);
         }
     }
