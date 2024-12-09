@@ -442,6 +442,8 @@
     "BodyAnim": {
       "__id__": 7
     },
+    "leftTouch": null,
+    "rightTouch": null,
     "_id": "12qcO4y+FGfrB3DDy9EYF6"
   },
   {
@@ -845,7 +847,7 @@
     "_priority": 0,
     "_fov": 45,
     "_fovAxis": 0,
-    "_orthoHeight": 485.0120481927711,
+    "_orthoHeight": 364.4019138755981,
     "_near": 0,
     "_far": 2000,
     "_color": {
@@ -937,7 +939,7 @@
     "__prefab": null,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 11.119823042168674,
+      "width": 11.120909184360048,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -970,7 +972,7 @@
     "_string": "0",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
-    "_actualFontSize": 25.9375,
+    "_actualFontSize": 26.125,
     "_fontSize": 20,
     "_fontFamily": "Arial",
     "_lineHeight": 40,
@@ -1337,7 +1339,7 @@
     "_string": "Play",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
-    "_actualFontSize": 25.9375,
+    "_actualFontSize": 26.125,
     "_fontSize": 20,
     "_fontFamily": "Arial",
     "_lineHeight": 40,
@@ -1607,7 +1609,7 @@
     "__prefab": null,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 204.47244446536143,
+      "width": 204.4921875,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -1640,7 +1642,7 @@
     "_string": "注意步数2d",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
-    "_actualFontSize": 51.875,
+    "_actualFontSize": 52.25,
     "_fontSize": 40,
     "_fontFamily": "Arial",
     "_lineHeight": 40,
@@ -1739,7 +1741,7 @@
     "__prefab": null,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 151.0793015813253,
+      "width": 151.09408875971891,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -1772,7 +1774,7 @@
     "_string": "鼠标左机：跳1步",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
-    "_actualFontSize": 25.9375,
+    "_actualFontSize": 26.125,
     "_fontSize": 20,
     "_fontFamily": "Arial",
     "_lineHeight": 40,
@@ -1871,7 +1873,7 @@
     "__prefab": null,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 151.0793015813253,
+      "width": 151.09408875971891,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -1904,7 +1906,7 @@
     "_string": "鼠标右机：跳2步",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
-    "_actualFontSize": 25.9375,
+    "_actualFontSize": 26.125,
     "_fontSize": 20,
     "_fontFamily": "Arial",
     "_lineHeight": 40,
