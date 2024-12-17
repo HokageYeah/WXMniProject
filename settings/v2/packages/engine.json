@@ -56,7 +56,7 @@
       },
       "physics-2d": {
         "_value": true,
-        "_option": "physics-2d-builtin"
+        "_option": "physics-2d-box2d"
       },
       "physics-2d-box2d": {
         "_value": "physics-2d-box2d"
@@ -152,7 +152,7 @@
       "gfx-webgl2",
       "intersection-2d",
       "particle-2d",
-      "physics-2d-builtin",
+      "physics-2d-box2d",
       "profiler",
       "spine",
       "tiled-map",
