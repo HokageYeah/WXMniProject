@@ -11,11 +11,13 @@ export class PipeSpawner extends Component {
     spawnRate: number = 0.5;
 
     private timer: number = 0;
+    private _isSpawning: boolean = false;
     start() {
 
     }
 
     update(deltaTime: number) {
+        if(!this._isSpawning) return
         this.timer += deltaTime;
         if(this.timer > this.spawnRate) {
             this.timer = 0;
@@ -28,6 +30,12 @@ export class PipeSpawner extends Component {
             const pLoca = pipInst.getPosition();
             pipInst.setPosition(pLoca.x,y)
         }
+    }
+    public pause() {
+        this._isSpawning = false;
+    }
+    public resume() {
+        this._isSpawning = true;
     }
 }
 

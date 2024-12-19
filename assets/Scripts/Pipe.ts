@@ -12,6 +12,9 @@ export class Pipe extends Component {
     update(deltaTime: number) {
         const p = this.node.position
         this.node.setPosition(p.x - this.moveSpeed * deltaTime, p.y)
+        if(p.x < -900) {
+            this.node.destroy();
+        }
     }
 }
 
