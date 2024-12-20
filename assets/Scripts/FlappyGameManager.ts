@@ -4,6 +4,7 @@ import { PipeSpawner } from './PipeSpawner';
 import { GameReadyUI } from './UI/GameReadyUI';
 import { GameData } from './GameData';
 import { Bird } from './Bird';
+import { GameOverUI } from './UI/GameOverUI';
 const { ccclass, property } = _decorator;
 
 // 游戏状态
@@ -33,9 +34,12 @@ export class FlappyGameManager extends Component {
     gameingUI: Node = null
     @property(Label)
     scoreLabel: Label = null
+    @property(GameOverUI)
+    gameOverUI: GameOverUI = null
 
     @property(Bird)
     bird: Bird = null
+    
 
     curGS: GameState = GameState.Ready;
 
@@ -62,6 +66,7 @@ export class FlappyGameManager extends Component {
         this.pipeSpawner.pause();
         this.gameReadyUI.node.active = true;
         this.gameingUI.active = false;
+        this.gameOverUI.hide();
     }
     transitionToGameingState() {
         this.curGS = GameState.Gameing;
@@ -73,11 +78,15 @@ export class FlappyGameManager extends Component {
         this.gameingUI.active = true;
     }
     transitionToGameOverState() {
+        if(this.curGS == GameState.GameOver) return
         this.curGS = GameState.GameOver;
-        this.bird.disableControl();
+        this.bird.disableControlNotRGD();
         this.bgMoving.disableMove();
         this.landMoving.disableMove();
         this.pipeSpawner.pause();
+        this.gameingUI.active = false;
+        this.gameOverUI.show(GameData.getScore(), GameData.getBestScore());
+        GameData.saveScore();
     }
     addScore(count: number=1) {
         GameData.addScore(count);

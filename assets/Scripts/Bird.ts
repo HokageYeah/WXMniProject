@@ -1,6 +1,7 @@
 import { _decorator, Animation, Collider2D, Component, Contact2DType, Input, input, IPhysics2DContact, Node, RigidBody2D, Vec2, Vec3 } from 'cc';
 import { Tags } from './Tags';
 import { FlappyGameManager } from './FlappyGameManager';
+import { GameManager } from './GameManager';
 const { ccclass, property } = _decorator;
 
 @ccclass('Bird')
@@ -62,8 +63,16 @@ export class Bird extends Component {
         // 禁用小鸟动画
         this.node.getComponent(Animation).enabled = false;
     }
+    public disableControlNotRGD() {
+        this._canControl = false;
+        // 禁用小鸟动画
+        this.node.getComponent(Animation).enabled = false;
+    }
     onBeginContact(selfCollider: Collider2D, otherCollider: Collider2D, contact: IPhysics2DContact | null) {
         console.log(otherCollider.tag)
+        if(otherCollider.tag == Tags.LAND || otherCollider.tag == Tags.PIPE) {
+            FlappyGameManager.inst().transitionToGameOverState();
+        }
     }
     onEndContact(selfCollider: Collider2D, otherCollider: Collider2D, contact: IPhysics2DContact | null) {
         console.log(otherCollider.tag)
