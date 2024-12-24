@@ -1,10 +1,11 @@
-import { _decorator, Component, Label, Node } from 'cc';
+import { _decorator, AudioClip, Component, Label, Node } from 'cc';
 import { MoveBg } from './MoveBg';
 import { PipeSpawner } from './PipeSpawner';
 import { GameReadyUI } from './UI/GameReadyUI';
 import { GameData } from './GameData';
 import { Bird } from './Bird';
 import { GameOverUI } from './UI/GameOverUI';
+import { AudioMgr } from './AudioMgr';
 const { ccclass, property } = _decorator;
 
 // 游戏状态
@@ -40,6 +41,12 @@ export class FlappyGameManager extends Component {
     @property(Bird)
     bird: Bird = null
     
+    // 背景音乐
+    @property(AudioClip)
+    bgAudio: AudioClip = null
+    // 游戏结束音效
+    @property(AudioClip)
+    gameOverAudio: AudioClip = null
 
     curGS: GameState = GameState.Ready;
 
@@ -49,6 +56,7 @@ export class FlappyGameManager extends Component {
     }
     protected onLoad(): void {
         FlappyGameManager._inst = this
+        AudioMgr.inst.play(this.bgAudio, 0.5);
     }
     start() {
         this.transitionToReadyState();
@@ -85,6 +93,8 @@ export class FlappyGameManager extends Component {
         this.landMoving.disableMove();
         this.pipeSpawner.pause();
         this.gameingUI.active = false;
+        AudioMgr.inst.stop();
+        AudioMgr.inst.audioSource.playOneShot(this.gameOverAudio, 0.5);
         this.gameOverUI.show(GameData.getScore(), GameData.getBestScore());
         GameData.saveScore();
     }

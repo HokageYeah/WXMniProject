@@ -1,7 +1,8 @@
-import { _decorator, Animation, Collider2D, Component, Contact2DType, Input, input, IPhysics2DContact, Node, RigidBody2D, Vec2, Vec3 } from 'cc';
+import { _decorator, Animation, AudioClip, Collider2D, Component, Contact2DType, Input, input, IPhysics2DContact, Node, RigidBody2D, Vec2, Vec3 } from 'cc';
 import { Tags } from './Tags';
 import { FlappyGameManager } from './FlappyGameManager';
 import { GameManager } from './GameManager';
+import { AudioMgr } from './AudioMgr';
 const { ccclass, property } = _decorator;
 
 @ccclass('Bird')
@@ -15,6 +16,10 @@ export class Bird extends Component {
 
     // 是否可以控制
     private _canControl: boolean = false;
+
+    // 点击音效
+    @property(AudioClip)
+    clickAudio: AudioClip = null
 
     start() {
     }
@@ -50,6 +55,7 @@ export class Bird extends Component {
         this.rgd2D.linearVelocity = new Vec2(0, 8)
         // this.node.setRotationFromEuler(new Vec3(0, 0, 30))
         this.node.angle = 30
+        AudioMgr.inst.audioSource.playOneShot(this.clickAudio, 0.5);
     }
     public enableControl() {
         this.rgd2D.enabled = true;
